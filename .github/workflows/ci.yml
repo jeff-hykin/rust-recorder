@@ -43,7 +43,7 @@ jobs:
                   path: dimos
                   lfs: false
             - uses: astral-sh/setup-uv@v6
-            - run: sudo apt-get update && sudo apt-get install -y portaudio19-dev libgl1
+            - run: sudo apt-get update && sudo apt-get install -y portaudio19-dev libgl1 libturbojpeg0
             - run: cd dimos && uv sync --frozen --no-dev || uv sync --no-dev
             - run: cd dimos && uv run python ../tests/reference/check_dimos.py ../fixtures --mcap
     # the zenoh glue against each zenoh the crate has to work with: 1.6 (Desktop's gateway) and 1.10 (dimos)
