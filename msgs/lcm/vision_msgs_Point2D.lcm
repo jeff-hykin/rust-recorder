@@ -1,0 +1,6 @@
+package vision_msgs;
+
+struct Point2D {
+    double x;
+    double y;
+}

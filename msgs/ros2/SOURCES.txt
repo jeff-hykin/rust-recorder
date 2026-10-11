@@ -1,0 +1,5 @@
+ros2/common_interfaces@a941f14bb318d8d904505ed935ccbb97f24a70a4: std_msgs, geometry_msgs, sensor_msgs, nav_msgs, shape_msgs, stereo_msgs, trajectory_msgs, visualization_msgs, diagnostic_msgs
+ros2/rcl_interfaces@7aa3caf43377ea6ad615bc1040832e2c7566bfbe: builtin_interfaces
+ros2/geometry2@f702874b1c8535d6a038230ab2cda0ba5d521ebd: tf2_msgs
+ros-perception/vision_msgs@1adca4dd009d529e08c953aaa4ff9a75ed79a22a: vision_msgs
+foxglove/foxglove-sdk@28fb2d5f7874cb80e46561402cba6a23b6ff256e: foxglove_msgs

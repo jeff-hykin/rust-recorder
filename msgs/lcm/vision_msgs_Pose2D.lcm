@@ -1,0 +1,6 @@
+package vision_msgs;
+
+struct Pose2D {
+    vision_msgs.Point2D position;
+    double theta;
+}

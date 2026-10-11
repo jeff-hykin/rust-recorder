@@ -1,0 +1,6 @@
+package vision_msgs;
+
+struct ObjectHypothesisWithPose {
+    ObjectHypothesis hypothesis;
+    geometry_msgs.PoseWithCovariance pose;
+}

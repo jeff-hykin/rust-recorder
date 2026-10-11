@@ -1,0 +1,7 @@
+package vision_msgs;
+
+struct BoundingBox2D {
+    vision_msgs.Pose2D center;
+    double size_x;
+    double size_y;
+}

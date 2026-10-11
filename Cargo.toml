@@ -1,0 +1,36 @@
+[package]
+name = "rust-recorder"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+description = "Records dimos LCM streams to a dimos SQLite store, dimos-layout MCAP, or ROS 2 CDR MCAP that opens in Foxglove"
+license = "Apache-2.0"
+repository = "https://github.com/jeff-hykin/rust-recorder"
+include = ["src/**", "msgs/**", "build.rs", "Cargo.toml", "README.md", "LICENSE", "NOTICE"]
+
+[lib]
+name = "rust_recorder"
+
+[features]
+default = ["png", "webp"]
+# extra CompressedImage formats for ROS 2 recordings (JPEG is always built in)
+png = ["dep:png"]
+webp = ["dep:image-webp"]
+jpegxl = ["dep:zune-jpegxl", "dep:zune-core"]
+
+[dependencies]
+anyhow = "1"
+crossbeam-channel = "0.5"
+jpeg-encoder = "0.7"
+lz4_flex = { version = "0.14", default-features = false, features = ["frame", "std"] }
+mcap = { version = "0.25", default-features = false, features = ["lz4", "zstd"] }
+rusqlite = { version = "0.40", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+png = { version = "0.18", optional = true }
+image-webp = { version = "0.2.4", optional = true }
+zune-jpegxl = { version = "0.5.2", optional = true }
+zune-core = { version = "0.5.3", optional = true }
+
+[dev-dependencies]
+tempfile = "3"

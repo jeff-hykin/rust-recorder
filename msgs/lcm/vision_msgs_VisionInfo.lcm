@@ -1,0 +1,8 @@
+package vision_msgs;
+
+struct VisionInfo {
+    std_msgs.Header header;
+    string method;
+    string database_location;
+    int32_t database_version;
+}

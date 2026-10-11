@@ -1,0 +1,62 @@
+name: ci
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+jobs:
+    test:
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ubuntu-latest, macos-14]
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@v4
+            - uses: dtolnay/rust-toolchain@stable
+            - uses: Swatinem/rust-cache@v2
+            - run: cargo test --locked --all-features
+            - run: cargo test --locked --no-default-features
+            # every CDR message decoded by rosbags and by Foxglove's own decoders, against what the recorder says it wrote
+            - run: cargo run --locked --example reference_fixture -- fixtures
+            - uses: astral-sh/setup-uv@v6
+            - run: uv run tests/reference/check_rosbags.py fixtures/ros2.mcap
+            - uses: denoland/setup-deno@v2
+              with:
+                  deno-version: v2.x
+            - run: deno run -A tests/reference/check_foxglove.ts fixtures/ros2.mcap
+    # dimos' own readers on the .db and the dimos-layout MCAP
+    dimos-readers:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                dimos: [main, desktop-gateway-v1.19.3]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: dtolnay/rust-toolchain@stable
+            - uses: Swatinem/rust-cache@v2
+            - run: cargo run --locked --example reference_fixture -- fixtures
+            - uses: actions/checkout@v4
+              with:
+                  repository: dimensionalOS/dimos
+                  ref: ${{ matrix.dimos }}
+                  path: dimos
+                  lfs: false
+            - uses: astral-sh/setup-uv@v6
+            - run: cd dimos && uv sync --frozen --no-dev || uv sync --no-dev
+            - run: cd dimos && uv run python ../tests/reference/check_dimos.py ../fixtures --mcap
+    # the zenoh glue against each zenoh the crate has to work with: 1.6 (Desktop's gateway) and 1.10 (dimos)
+    zenoh:
+        strategy:
+            fail-fast: false
+            matrix:
+                zenoh: [zenoh-1-6, zenoh-1-10]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: dtolnay/rust-toolchain@stable
+            - uses: Swatinem/rust-cache@v2
+              with:
+                  workspaces: compat/${{ matrix.zenoh }}
+            - run: cargo test
+              working-directory: compat/${{ matrix.zenoh }}

@@ -1,0 +1,8 @@
+package vision_msgs;
+
+struct LabelInfo {
+    int32_t class_map_length;
+    std_msgs.Header header;
+    vision_msgs.VisionClass class_map[class_map_length];
+    float threshold;
+}

@@ -1,0 +1,14 @@
+# rust-recorder's zenoh glue compiled against zenoh 1.10.1 (its own workspace and lockfile: one crate graph can't hold two zenoh 1.x)
+[package]
+name = "rust-recorder-zenoh-1-10"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[dependencies]
+rust-recorder = { path = "../.." }
+zenoh = { version = "=1.10.1", default-features = false, features = ["transport_tcp", "transport_udp"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time"] }
+mcap = { version = "0.25", default-features = false, features = ["zstd", "lz4"] }

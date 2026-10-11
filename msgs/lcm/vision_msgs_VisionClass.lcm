@@ -1,0 +1,6 @@
+package vision_msgs;
+
+struct VisionClass {
+    int16_t class_id;
+    string class_name;
+}

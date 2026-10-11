@@ -1,0 +1,6 @@
+package vision_msgs;
+
+struct ObjectHypothesis {
+    string class_id;
+    double score;
+}

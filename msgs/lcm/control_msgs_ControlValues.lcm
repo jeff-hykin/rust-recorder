@@ -1,0 +1,20 @@
+package control_msgs;
+
+// Continuous command or state data. Capabilities come from startup
+// configuration; lifecycle requests and their results use RPC.
+struct ControlValues {
+    // Publisher identity, not a hardware-specific routing identifier.
+    string source;
+    // Publisher Unix timestamp in seconds; not proof of receiver-side freshness.
+    double source_ts;
+    // Identifies the state generation or command session. Established outside
+    // this data message; sequences are compared only within the same epoch.
+    int64_t epoch;
+    int64_t sequence;
+    // Parallel arrays: publishers and consumers must validate equal lengths,
+    // unique declared names, and finite values. Empty arrays are encodable.
+    int32_t interface_names_length;
+    int32_t values_length;
+    string interface_names[interface_names_length];
+    double values[values_length];
+}

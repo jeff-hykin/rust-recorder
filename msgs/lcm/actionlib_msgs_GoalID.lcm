@@ -1,0 +1,6 @@
+package actionlib_msgs;
+
+struct GoalID {
+    std_msgs.Time stamp;
+    string id;
+}

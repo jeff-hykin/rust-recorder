@@ -1,0 +1,9 @@
+package vision_msgs;
+
+struct Detection3D {
+    int32_t results_length;
+    std_msgs.Header header;
+    ObjectHypothesisWithPose results[results_length];
+    BoundingBox3D bbox;
+    string id;
+}

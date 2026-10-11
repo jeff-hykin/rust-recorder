@@ -1,0 +1,17 @@
+rust-recorder
+Copyright 2026 Jeff Hykin
+
+This crate is derived from the experimental native recorder in DimOS
+(dimensionalOS/dimos, dimos/experimental/memory/rust, by TomCC7), which is
+Copyright 2026 Dimensional Inc. and licensed under the Apache License 2.0.
+Its storage layouts, codec ids, MCAP channel metadata and time rules are kept.
+
+Vendored message definitions (msgs/), unmodified:
+- msgs/lcm: dimensionalOS/dimos-lcm lcm_types (Dimensional Inc.; see msgs/lcm/SOURCES.txt)
+- msgs/ros2/{std,geometry,sensor,nav,shape,stereo,trajectory,visualization,diagnostic}_msgs:
+  ros2/common_interfaces (Apache-2.0)
+- msgs/ros2/builtin_interfaces: ros2/rcl_interfaces (Apache-2.0)
+- msgs/ros2/tf2_msgs: ros2/geometry2 (BSD-3-Clause)
+- msgs/ros2/vision_msgs: ros-perception/vision_msgs (Apache-2.0)
+- msgs/ros2/foxglove_msgs: foxglove/foxglove-sdk (MIT)
+Pinned commits are in msgs/ros2/SOURCES.txt.
