@@ -57,7 +57,7 @@ use process::ChannelSpec;
 pub use store::{companions, recover, Recovered};
 
 /// The file a recording is written as.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Format {
     /// a dimos SqliteStore `.db` (`SqliteStore(path=…)`, `dimos --replay`)
@@ -65,6 +65,7 @@ pub enum Format {
     /// MCAP in dimos' storage layout (profile "dimos": lcm / jpeg / lz4+lcm / json channels), what dimos' McapStore reads
     DimosMcap,
     /// MCAP with profile "ros2": CDR with full ros2msg schemas (Foxglove, rosbag2 tooling); raw LCM where no ROS 2 type fits
+    #[default]
     Ros2Mcap,
 }
 
